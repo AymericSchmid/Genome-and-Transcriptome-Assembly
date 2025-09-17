@@ -1,0 +1,4 @@
+# Ignoring:
+output/
+reads/
+reads_filt/*.fastq.gz
