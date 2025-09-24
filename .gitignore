@@ -1,4 +1,6 @@
 # Ignoring:
+assembly/
+kmer_counting/
 output/
 reads/
 reads_filt/*.fastq.gz
