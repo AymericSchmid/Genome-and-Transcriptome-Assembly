@@ -4,4 +4,5 @@ assembly_QC/
 kmer_counting/
 output/
 reads/
+genome_comparisons/
 reads_filt/*.fastq.gz
