@@ -1,5 +1,6 @@
 # Ignoring:
 assembly/
+assembly_QC/
 kmer_counting/
 output/
 reads/
