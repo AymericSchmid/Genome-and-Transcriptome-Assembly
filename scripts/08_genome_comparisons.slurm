@@ -46,6 +46,8 @@ apptainer exec --bind /data $MUMMER_IMG \
 nucmer --prefix=$PREFIX --breaklen 1000 --mincluster 1000 \
 ${FAS[A]} ${FAS[B]}
 
+# ------ Create dotplot ------
+
 apptainer exec --bind /data $MUMMER_IMG \
 mummerplot --prefix=$PREFIX --filter --fat --large --layout -t png \
 -R ${FAS[A]} \
