@@ -40,14 +40,12 @@ PREFIX=${NAMES[A]}_vs_${NAMES[B]}
 mkdir -p $OUT_DIR
 cd $OUT_DIR
 
-# ------ Comparing pair ------
-
+# Align assembly pair
 apptainer exec --bind /data $MUMMER_IMG \
 nucmer --prefix=$PREFIX --breaklen 1000 --mincluster 1000 \
 ${FAS[A]} ${FAS[B]}
 
-# ------ Create dotplot ------
-
+# Plot dotplot
 apptainer exec --bind /data $MUMMER_IMG \
 mummerplot --prefix=$PREFIX --filter --fat --large --layout -t png \
 -R ${FAS[A]} \

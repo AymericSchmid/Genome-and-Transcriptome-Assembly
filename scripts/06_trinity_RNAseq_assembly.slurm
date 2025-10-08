@@ -13,8 +13,10 @@ READS_2="/data/users/aschmid/Genome-and-Transcriptome-Assembly/reads_filt/ERR754
 OUT_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/assembly/trinity"
 mkdir -p $OUT_DIR
 
+# Load Trinity module
 module add Trinity
 
+# Assemble RNA-seq reads with Trinity
 Trinity \
 --seqType fq \
 --left $READS_1 \

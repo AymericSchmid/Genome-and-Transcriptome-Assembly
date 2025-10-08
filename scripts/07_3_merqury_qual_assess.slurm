@@ -20,8 +20,10 @@ LJA_FA="$ASSEMBLY_DIR/LJA/assembly.fasta"
 
 OUT_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/assembly_QC/merqury"
 
+# Create output directory
 mkdir -p $OUT_DIR
 
+# Run Merqury workflow for each assembly
 apptainer exec --bind /data --bind /usr/bin/ln:/bin/ln $MERQURY_IMG bash -lc '
     export MERQURY="/usr/local/share/merqury"
 
@@ -36,6 +38,7 @@ apptainer exec --bind /data --bind /usr/bin/ln:/bin/ln $MERQURY_IMG bash -lc '
     K="$("${MERQURY}/best_k.sh" 135000000 | tail -n1 | awk '\''{print int($1+0.5)}'\'')"
     echo "Using k=$K" | tee "$OUT_DIR/k.txt"
 
+    # Count k-mers from reads (cached)
     READ_DB="${OUT_DIR}/reads.k$K.meryl"
     if [ ! -d $READ_DB ]; then
         meryl count k=$K threads=$SLURM_CPUS_PER_TASK output $READ_DB $READS

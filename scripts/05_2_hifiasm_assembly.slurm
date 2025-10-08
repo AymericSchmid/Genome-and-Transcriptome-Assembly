@@ -12,9 +12,12 @@ READS_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/reads/Ms-0"
 OUT_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/assembly/hifiasm"
 HIFIASM_IMG="/containers/apptainer/hifiasm_0.25.0.sif"
 
+# Create output directory
 mkdir -p $OUT_DIR
 
+# Assemble with hifiasm
 apptainer run --bind /data $HIFIASM_IMG \
 hifiasm -o $OUT_DIR/asm -t $SLURM_CPUS_PER_TASK $READS_DIR/*
 
+# Convert primary contigs from GFA to FASTA
 awk -F'\t' '$1=="S"{print ">"$2"\n"$3}' "$OUT_DIR/asm.bp.p_ctg.gfa" > "$OUT_DIR/asm.bp.p_ctg.fa"

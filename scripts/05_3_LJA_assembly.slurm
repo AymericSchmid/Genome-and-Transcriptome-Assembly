@@ -12,8 +12,10 @@ READS_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/reads/Ms-0"
 OUT_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/assembly/LJA"
 LJA_IMG="/containers/apptainer/lja-0.2.sif"
 
+# Create output directory
 mkdir -p $OUT_DIR
 
+# Assemble with LJA
 apptainer run --bind /data $LJA_IMG \
 lja -o $OUT_DIR --reads $READS_DIR/* \
 -t $SLURM_CPUS_PER_TASK

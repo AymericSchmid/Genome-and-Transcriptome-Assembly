@@ -24,7 +24,7 @@ REF_DIR="/data/courses/assembly-annotation-course/references"
 REF="${REF_DIR}/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.gz"
 FEATURES="${REF_DIR}/Arabidopsis_thaliana.TAIR10.57.gff3"
 
-# Add argument useRef when running the script
+# Optional argument: pass "useRef" to include reference and features
 USE_REF=0
 if [[ "${1:-}" == "useRef" ]]; then USE_REF=1; fi
 if (( USE_REF )); then
@@ -33,6 +33,7 @@ else
     OUT_DIR="$OUT_DIR/no_ref"
 fi
 
+# Create output directory
 mkdir -p "$OUT_DIR"
 
 COMMON_ARGS=(
@@ -47,11 +48,13 @@ COMMON_ARGS=(
 )
 
 if (( USE_REF )); then
+    # Run QUAST with reference and annotations
     apptainer run --bind /data $QUAST_IMG \
     quast $FLYE_FA $HIFIASM_FA $LJA_FA \
     ${COMMON_ARGS[@]} \
     -r $REF --features $FEATURES
 else
+    # Run QUAST without reference
     apptainer run --bind /data $QUAST_IMG \
     quast $FLYE_FA $HIFIASM_FA $LJA_FA \
     ${COMMON_ARGS[@]}

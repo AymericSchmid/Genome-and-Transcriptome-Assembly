@@ -12,7 +12,8 @@ FASTQC_IMG="/containers/apptainer/fastqc-0.12.1.sif"
 FILT_READS_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/reads_filt"
 RESULTS_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/reads_QC"
 
-mkdir $RESULTS_DIR
+# Create QC output directory (if missing)
+mkdir -p $RESULTS_DIR
 
-# Only on RNAseq reads => HIFI are not cleaned
+# Run FastQC on trimmed RNA-seq reads only
 apptainer run --bind /data $FASTQC_IMG fastqc -t $SLURM_CPUS_PER_TASK -o $RESULTS_DIR $FILT_READS_DIR/*.trimmed.fastq.gz

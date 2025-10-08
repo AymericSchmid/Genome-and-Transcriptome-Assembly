@@ -12,8 +12,10 @@ READS_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/reads/Ms-0"
 OUT_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/assembly/flye"
 FLYE_IMG="/containers/apptainer/flye_2.9.5.sif"
 
+# Create output directory
 mkdir -p $OUT_DIR
 
+# Assemble with Flye (PacBio HiFi)
 apptainer run --bind /data $FLYE_IMG \
 flye --pacbio-hifi $READS_DIR/* -o $OUT_DIR \
 -t $SLURM_CPUS_PER_TASK

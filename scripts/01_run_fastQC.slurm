@@ -13,6 +13,8 @@ READS_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/reads"
 RESULTS_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/reads_QC"
 ACCESSION="Ms-0"
 
-mkdir $RESULTS_DIR
+# Create QC output directory
+mkdir -p $RESULTS_DIR
 
+# Run FastQC on genomic and RNA-seq reads
 apptainer run --bind /data $FASTQC_IMG fastqc -t $SLURM_CPUS_PER_TASK -o $RESULTS_DIR $READS_DIR/$ACCESSION/* $READS_DIR/RNAseq_Sha/*

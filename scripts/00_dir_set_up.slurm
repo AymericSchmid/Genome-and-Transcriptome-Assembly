@@ -11,7 +11,9 @@
 READS_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/reads"
 ACCESSION="Ms-0"
 
+# Create reads directory
 mkdir $READS_DIR
 
+# Link genomic and RNA-seq reads
 ln -s /data/courses/assembly-annotation-course/raw_data/$ACCESSION $READS_DIR
 ln -s /data/courses/assembly-annotation-course/raw_data/RNAseq_Sha $READS_DIR

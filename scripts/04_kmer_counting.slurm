@@ -12,13 +12,16 @@ READS_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/reads/Ms-0"
 OUT_DIR="/data/users/aschmid/Genome-and-Transcriptome-Assembly/kmer_counting"
 JELLYFISH_IMG="/containers/apptainer/jellyfish:2.2.6--0"
 
+# Create output directory
 mkdir -p $OUT_DIR
 
+# Count 21-mers from compressed reads
 apptainer run --bind /data $JELLYFISH_IMG \
 jellyfish count \
 -C -m 21 -s 1600000000 -t $SLURM_CPUS_PER_TASK -o $OUT_DIR/reads.jf \
 <(zcat $READS_DIR/*)
 
+# Build k-mer histogram
 apptainer run --bind /data $JELLYFISH_IMG \
 jellyfish histo \
 -t $SLURM_CPUS_PER_TASK $OUT_DIR/reads.jf > $OUT_DIR/reads.histo

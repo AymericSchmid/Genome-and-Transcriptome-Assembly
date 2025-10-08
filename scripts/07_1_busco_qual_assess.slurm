@@ -24,12 +24,15 @@ NAMES=('flye' 'hifiasm' 'LJA' 'trinity')
 
 LINEAGE='brassicales_odb10'
 
+# Create output directory
 mkdir -p $OUT_DIR
 
 cd $OUT_DIR
 
+# Load BUSCO module
 module load BUSCO
 
+# Run BUSCO on each assembly (via array)
 busco -i ${FAS[SLURM_ARRAY_TASK_ID]} \
 -m ${MODES[SLURM_ARRAY_TASK_ID]} \
 -o ${NAMES[SLURM_ARRAY_TASK_ID]} \

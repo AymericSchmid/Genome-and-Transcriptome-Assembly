@@ -20,9 +20,10 @@ R1_BASE="$(basename "${RNA_R1}" .fastq.gz)"
 R2_BASE="$(basename "${RNA_R2}" .fastq.gz)"
 HIFI_BASE="$(basename "${HIFI}" .fastq.gz)"
 
+# Create output directory for filtered/trimmed reads
 mkdir -p $OUT_DIR
 
-# Illumina RNA-seq
+# Filter and trim Illumina RNA-seq reads
 apptainer run --bind /data $FASTP_IMG fastp \
     -i $RNA_R1 -I $RNA_R2 \
     -o "$OUT_DIR/${R1_BASE}.trimmed.fastq.gz" -O "$OUT_DIR/${R2_BASE}.trimmed.fastq.gz" \
@@ -31,7 +32,7 @@ apptainer run --bind /data $FASTP_IMG fastp \
     --length_required 30 \
     -h "${OUT_DIR}/fastp_rna.html"
 
-# PacBio HiFi (no filtering)
+# Copy PacBio HiFi reads without filtering
 apptainer run --bind /data $FASTP_IMG fastp \
     -i $HIFI \
     -o "$OUT_DIR/${HIFI_BASE}.copy.fastq.gz" \
