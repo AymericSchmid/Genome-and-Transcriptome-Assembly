@@ -5,4 +5,5 @@ kmer_counting/
 output/
 reads/
 genome_comparisons/
-reads_filt/*.fastq.gz
+reads_filt/
+reads_QC/
